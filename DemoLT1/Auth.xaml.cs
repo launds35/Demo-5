@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DemoLT1.Data;
+using DemoLT1.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +28,19 @@ namespace DemoLT1
 
         private void EnterButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow window = new MainWindow();
+            string login = LoginBox.Text;
+            string password = PwdInputBox.Password;
+
+            //User user = DbHelper.Authorize(login, password);
+
+            User testUser = new User
+            {
+                IdRole = 1,
+                Role = "Администратор",
+                FullName = "Иванов Иван Ивановиччччч"
+            };
+
+            MainWindow window = new MainWindow(testUser);
             window.Closed += (s, args) => this.Show();
             this.Hide();
             window.Show();
@@ -34,7 +48,10 @@ namespace DemoLT1
 
         private void GuestButton_Click(object sender, RoutedEventArgs e)
         {
-
+            MainWindow window = new MainWindow(null);
+            window.Closed += (s, args) => this.Show();
+            this.Hide();
+            window.Show();
         }
     }
 }

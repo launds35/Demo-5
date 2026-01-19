@@ -10,7 +10,7 @@ namespace DemoLT1.Data
     public static class Db
     {
         private static readonly string _connectionString = @"
-        Server=localhost\MSSQLSERVER;
+        Server=localhost;
         Database=lt1;
         Trusted_connection=True;
         TrustServerCertificate=True;";

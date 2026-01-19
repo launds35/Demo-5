@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DemoLT1"
         mc:Ignorable="d" FontFamily="Times New Roman" FontSize="18px"
-        Title="Auth" Height="550" Width="400" Icon="/Resources/Icon.png">
+        Title="Авторизация" Height="550" Width="400" Icon="/Resources/Icon.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
@@ -15,8 +15,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Image HorizontalAlignment="Center" Height="200" Margin="0,0,0,0" VerticalAlignment="Center" Width="200" Source="/Resources/Icon.png"/>
-        <TextBox HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="230"/>
-        <PasswordBox HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="230"/>
+        <TextBox x:Name="LoginBox" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="230"/>
+        <PasswordBox x:Name="PwdInputBox" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="230"/>
         <Label HorizontalAlignment="Left" Margin="5,0,20,0" Grid.Row="2" Content="Пароль:" VerticalAlignment="Center" Width="120"/>
         <Label HorizontalAlignment="Left" Margin="5,0,20,0" Grid.Row="1" Content="Логин:" VerticalAlignment="Center" Width="120"/>
         <Button x:Name="EnterButton" Content="Войти" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Width="230" Background="{DynamicResource Accent}" Click="EnterButton_Click"/>
