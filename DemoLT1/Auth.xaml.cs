@@ -32,11 +32,18 @@ namespace DemoLT1
             string password = PwdInputBox.Password;
 
             User user = DbHelper.Authorize(login, password);
-
-            MainWindow window = new MainWindow(user);
-            window.Closed += (s, args) => this.Show();
-            this.Hide();
-            window.Show();
+            if(user != null)
+            {
+                MainWindow window = new MainWindow(user);
+                window.Closed += (s, args) => this.Show();
+                this.Hide();
+                window.Show();
+            }
+            else
+            {
+                MessageBox.Show("Введен неверный логин или пароль!",
+                    "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void GuestButton_Click(object sender, RoutedEventArgs e)

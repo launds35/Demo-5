@@ -348,8 +348,8 @@ namespace DemoLT1.Data
             }
             catch
             {
-                MessageBox.Show("Введен неверный логин или пароль!", 
-                    "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Warning);
+                //MessageBox.Show("Введен неверный логин или пароль!", 
+                //    "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             return null;
         }
