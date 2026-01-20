@@ -31,16 +31,9 @@ namespace DemoLT1
             string login = LoginBox.Text;
             string password = PwdInputBox.Password;
 
-            //User user = DbHelper.Authorize(login, password);
+            User user = DbHelper.Authorize(login, password);
 
-            User testUser = new User
-            {
-                IdRole = 1,
-                Role = "Администратор",
-                FullName = "Иванов Иван Ивановиччччч"
-            };
-
-            MainWindow window = new MainWindow(testUser);
+            MainWindow window = new MainWindow(user);
             window.Closed += (s, args) => this.Show();
             this.Hide();
             window.Show();

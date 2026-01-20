@@ -1,6 +1,7 @@
 ﻿using DemoLT1.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Linq;
@@ -63,6 +64,158 @@ namespace DemoLT1.Data
                 
                 return null;
             }
+        }
+
+        public static bool AddGood(Good good)
+        {
+            try
+            {
+                string sql = @"INSERT INTO Goods (IdGood, Article, GoodName, UnitOfMeasure, Price, 
+                    IdSupplier, IdFabric, IdCategory, 
+                    Discount, Count, Description, Фото)
+                    VALUES (@IdGood, @Article, @GoodName, @UnitOfMeasure, @Price, 
+                    @IdSupplier, @IdFabric, @IdCategory, 
+                    @Discount, @Count, @Description, @Фото);";
+
+                using (SqlConnection conn = Db.GetConnection())
+                {
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    conn.Open();
+                    cmd.Parameters.AddWithValue("@IdGood", good.Id);
+                    cmd.Parameters.AddWithValue("@Article", good.Article);
+                    cmd.Parameters.AddWithValue("@GoodName", good.GoodName);
+                    cmd.Parameters.AddWithValue("@UnitOfMeasure", good.UnitOfMeasure);
+                    cmd.Parameters.AddWithValue("@Price", good.Price);
+                    cmd.Parameters.AddWithValue("@IdSupplier", good.IdSupplier);
+                    cmd.Parameters.AddWithValue("@IdFabric", good.IdFabric);
+                    cmd.Parameters.AddWithValue("@IdCategory", good.IdCategory);
+                    cmd.Parameters.AddWithValue("@Discount", good.Discount);
+                    cmd.Parameters.AddWithValue("@Count", good.Count);
+                    cmd.Parameters.AddWithValue("@Description", good.Description);
+                    cmd.Parameters.AddWithValue("@Фото", good.Photo);
+
+                    var result = cmd.ExecuteNonQuery();
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show($"Ошибка добавления товара (ID: {good.Id}):\n{ex}",
+                      "Ошибка работы с БД", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+            return false;
+        }
+
+        public static bool DeleteGood(int id)
+        {
+            try
+            {
+                string sql = @"Delete FROM Goods WHERE IdGood = @IdGood;";
+
+                using (SqlConnection conn = Db.GetConnection())
+                {
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    conn.Open();
+                    cmd.Parameters.AddWithValue("@IdGood", id);
+
+                    var result = cmd.ExecuteNonQuery();
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+
+                }
+            }
+            catch
+            {
+
+                MessageBox.Show($"Товар находится в заказе!",
+                      $"Ошибка удаления товара (ID: {id})", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+            return false;
+        }
+
+        public static int GetMaxId()
+        {
+            try
+            {
+                string sql = @"SELECT MAX(IdGood) From Goods;";
+
+                using (SqlConnection conn = Db.GetConnection())
+                {
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    conn.Open();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader()) {
+                        if (reader.Read()) {
+                            return reader.GetInt32(0);
+                        }
+                    }
+
+                }
+            }
+            catch
+            {
+
+                MessageBox.Show($"Ошибка получения максимального Id",
+                      $"Ошибка БД", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+            return -1;
+        }
+
+
+        public static bool EditGood(Good good)
+        {
+            try
+            {
+                string sql = @"
+                Update Goods SET Article = @Article, GoodName = @GoodName, 
+                    UnitOfMeasure = @UnitOfMeasure, Price = @Price, 
+                    IdSupplier = @IdSupplier, IdFabric = @IdFabric, IdCategory = @IdCategory, 
+                    Discount = @Discount, Count = @Count, Description = @Description, Фото = @Фото
+                WHERE IdGood = @IdGood;";
+
+                using (SqlConnection conn = Db.GetConnection())
+                {
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    conn.Open();
+                    cmd.Parameters.AddWithValue("@IdGood", good.Id);
+                    cmd.Parameters.AddWithValue("@Article", good.Article);
+                    cmd.Parameters.AddWithValue("@GoodName", good.GoodName);
+                    cmd.Parameters.AddWithValue("@UnitOfMeasure", good.UnitOfMeasure);
+                    cmd.Parameters.AddWithValue("@Price", good.Price);
+                    cmd.Parameters.AddWithValue("@IdSupplier", good.IdSupplier);
+                    cmd.Parameters.AddWithValue("@IdFabric", good.IdFabric);
+                    cmd.Parameters.AddWithValue("@IdCategory", good.IdCategory);
+                    cmd.Parameters.AddWithValue("@Discount", good.Discount);
+                    cmd.Parameters.AddWithValue("@Count", good.Count);
+                    cmd.Parameters.AddWithValue("@Description", good.Description);
+                    cmd.Parameters.AddWithValue("@Фото", good.Photo);
+
+                    var result = cmd.ExecuteNonQuery();
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show($"Ошибка редактирования товара (ID: {good.Id}):\n{ex}",
+                      "Ошибка работы с БД", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+            return false;
         }
 
         public static List<ComboBoxItems> GetSuppliers()

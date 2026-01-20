@@ -8,7 +8,7 @@
         Title="AddEditWindow" Height="450" Width="627" Icon="/Resources/Icon.png">
     <Grid x:Name="UnitOfMeasureBox">
         <Label Content="Артикуль" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="ArticleBox" HorizontalAlignment="Left" Margin="10,34,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="ArticleBox" HorizontalAlignment="Left" Margin="10,34,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" PreviewTextInput="ArticleBox_PreviewTextInput"/>
         <Label Content="Название&#x9; товара" HorizontalAlignment="Left" Margin="146,10,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="LabelBox" HorizontalAlignment="Left" Margin="146,34,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="Единица измерения" HorizontalAlignment="Left" Margin="280,10,0,0" VerticalAlignment="Top"/>
